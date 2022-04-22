@@ -8,9 +8,6 @@ import android.view.ViewGroup
 
 
 class PostsFragment : Fragment() {
-
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -18,6 +15,4 @@ class PostsFragment : Fragment() {
         val v= inflater.inflate(R.layout.fragment_posts, container, false)
         return v
     }
-
-
 }
