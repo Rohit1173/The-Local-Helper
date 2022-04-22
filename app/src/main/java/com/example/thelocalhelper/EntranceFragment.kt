@@ -26,13 +26,6 @@ class EntranceFragment : Fragment() {
         signup.setOnClickListener {
             findNavController().navigate(R.id.action_fr_entrance_to_fr_signup)
         }
-
-        val mapactbtn : Button = v.findViewById(R.id.mapactivitybutton)
-        mapactbtn.setOnClickListener {
-            val intent = Intent(activity, MapsActivity::class.java)
-            startActivity(intent);
-        }
-
         return v
     }
 

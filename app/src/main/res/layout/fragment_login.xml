@@ -5,8 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".LoginFragment">
+    tools:context=".LoginFragment"
+    android:background="@drawable/wave_bg"
+    >
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="monospace"
+        android:text="Welcome Back User!\nLogin Here..."
+        android:textSize="23dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/lay_log_user"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.158"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.289" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/lay_log_user"
@@ -15,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="62dp"
         android:layout_marginLeft="62dp"
-        android:layout_marginTop="210dp"
+        android:layout_marginTop="300dp"
         android:hint="USERNAME"
         app:endIconMode="clear_text"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="62dp"
         android:layout_marginLeft="62dp"
-        android:layout_marginTop="315dp"
+        android:layout_marginTop="380dp"
         android:hint="PASSWORD"
         app:endIconMode="password_toggle"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,7 +74,7 @@
         android:id="@+id/log_btn"
         android:layout_width="340dp"
         android:layout_height="71dp"
-        android:layout_marginTop="445dp"
+        android:layout_marginTop="470dp"
         android:text="LOGIN"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
