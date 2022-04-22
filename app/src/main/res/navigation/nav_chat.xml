@@ -7,22 +7,22 @@
 
     <fragment
         android:id="@+id/account"
-        android:name="com.example.thelocalhelper.Account"
+        android:name="com.example.thelocalhelper.AccountFragment"
         android:label="fragment_account"
         tools:layout="@layout/fragment_account" />
     <fragment
         android:id="@+id/group_chat"
-        android:name="com.example.thelocalhelper.group_chat"
+        android:name="com.example.thelocalhelper.GroupChatFragment"
         android:label="fragment_group_chat"
         tools:layout="@layout/fragment_group_chat" />
     <fragment
         android:id="@+id/single_chat"
-        android:name="com.example.thelocalhelper.single_chat"
+        android:name="com.example.thelocalhelper.SingleChatFragment"
         android:label="fragment_single_chat"
         tools:layout="@layout/fragment_single_chat" />
     <fragment
         android:id="@+id/posts"
-        android:name="com.example.thelocalhelper.posts"
+        android:name="com.example.thelocalhelper.PostsFragment"
         android:label="fragment_posts"
         tools:layout="@layout/fragment_posts" />
 </navigation>

@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
 
-class single_chat : Fragment() {
+class SingleChatFragment : Fragment() {
 
 
     override fun onCreateView(
@@ -20,7 +20,7 @@ class single_chat : Fragment() {
         var nearby_people: MutableList<String> = mutableListOf(
             "Rohit","Ayush","Yash","Rishi"
         )
-         re.adapter=single_chat_adapter(nearby_people)
+         re.adapter=SingleChatAdapter(nearby_people)
         re.setHasFixedSize(true)
 
         return v;

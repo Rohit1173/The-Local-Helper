@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fr_entrance"
-        android:name="com.example.thelocalhelper.entrance"
+        android:name="com.example.thelocalhelper.EntranceFragment"
         android:label="fragment_entrance"
         tools:layout="@layout/fragment_entrance" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/fr_login"
-        android:name="com.example.thelocalhelper.login"
+        android:name="com.example.thelocalhelper.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/fr_signup"
-        android:name="com.example.thelocalhelper.signup"
+        android:name="com.example.thelocalhelper.SignUpFragment"
         android:label="fragment_signup"
         tools:layout="@layout/fragment_signup" >
         <action

@@ -9,7 +9,7 @@ import android.widget.Button
 import androidx.navigation.fragment.findNavController
 
 
-class entrance : Fragment() {
+class EntranceFragment : Fragment() {
 
 
     override fun onCreateView(

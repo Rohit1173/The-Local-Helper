@@ -13,10 +13,9 @@ import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
-import kotlin.math.sign
 
 
-class signup : Fragment() {
+class SignUpFragment : Fragment() {
 
     lateinit var signup_btn: Button
     lateinit var sigtxt:TextView
@@ -56,7 +55,7 @@ class signup : Fragment() {
                 lay_set_password.error = "Password cannot be empty"
             }
             if(checks()) {
-                val intent = Intent(activity, chat::class.java)
+                val intent = Intent(activity, ChatActivity::class.java)
                 intent.putExtra("username", set_uname.text.toString().trim())
                 startActivity(intent)
             }

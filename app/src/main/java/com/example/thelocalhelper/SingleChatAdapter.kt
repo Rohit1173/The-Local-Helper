@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class single_chat_adapter(private var list: MutableList<String>) :
-    RecyclerView.Adapter<single_chat_adapter.ViewHolder>() {
+class SingleChatAdapter(private var list: MutableList<String>) :
+    RecyclerView.Adapter<SingleChatAdapter.ViewHolder>() {
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val re_text: TextView = view.findViewById(R.id.recycler_text)
         val context = view.context

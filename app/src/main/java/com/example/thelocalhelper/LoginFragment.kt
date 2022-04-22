@@ -15,7 +15,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
 
-class login : Fragment() {
+class LoginFragment : Fragment() {
 
     lateinit var log_btn:Button
     lateinit var logtxt:TextView
@@ -61,7 +61,7 @@ class login : Fragment() {
             if (log_user.text.toString().trim()
                     .isNotEmpty() && log_password.text.toString().trim().isNotEmpty()
             ) {
-                val intent = Intent(activity, chat::class.java)
+                val intent = Intent(activity, ChatActivity::class.java)
                 intent.putExtra("username", log_user.text.toString().trim())
                 startActivity(intent)
             }
