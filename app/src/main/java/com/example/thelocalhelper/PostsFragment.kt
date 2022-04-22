@@ -15,7 +15,6 @@ class PostsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val v= inflater.inflate(R.layout.fragment_posts, container, false)
         return v
     }
