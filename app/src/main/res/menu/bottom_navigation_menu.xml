@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/single_chat"
+        android:enabled="true"
+        android:icon="@drawable/ic_chat"
+        android:title="Chat"/>
+    <item
+        android:id="@+id/group_chat"
+        android:enabled="true"
+        android:icon="@drawable/ic_group"
+        android:title="Group"/>
+    <item
+        android:id="@+id/posts"
+        android:enabled="true"
+        android:icon="@drawable/ic_post"
+        android:title="Posts"
+        />
+    <item
+        android:id="@+id/account"
+        android:enabled="true"
+        android:icon="@drawable/ic_account"
+        android:title="Account"/>
+</menu>
