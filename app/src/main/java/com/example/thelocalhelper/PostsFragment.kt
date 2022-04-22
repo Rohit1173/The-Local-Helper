@@ -7,10 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 
 
-class posts : Fragment() {
-
-
-
+class PostsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -18,6 +15,4 @@ class posts : Fragment() {
         val v= inflater.inflate(R.layout.fragment_posts, container, false)
         return v
     }
-
-
 }

@@ -3,7 +3,6 @@ package com.example.thelocalhelper
 import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
-import android.os.AsyncTask
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +15,7 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 
 
-class Account : Fragment() {
+class AccountFragment : Fragment() {
 
     lateinit var long_lat: TextView
     lateinit var location: FusedLocationProviderClient
@@ -30,7 +29,7 @@ class Account : Fragment() {
     ): View? {
         val v = inflater.inflate(R.layout.fragment_account, container, false)
         status = v.findViewById(R.id.status)
-        val network = networkConnection(requireContext())
+        val network = NetworkConnection(requireContext())
         requireActivity().runOnUiThread {
             network.observe(viewLifecycleOwner) { isConnected ->
                 if (isConnected) {

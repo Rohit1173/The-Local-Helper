@@ -14,7 +14,7 @@
         android:theme="@style/Theme.TheLocalHelper">
 
         <activity
-            android:name=".chat"
+            android:name=".ChatActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustPan"
             />

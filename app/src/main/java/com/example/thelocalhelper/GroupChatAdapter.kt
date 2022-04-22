@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class group_chat_adapter(private var list: MutableList<message>) :
-    RecyclerView.Adapter<group_chat_adapter.ViewHolder>() {
+class GroupChatAdapter(private var list: MutableList<message>) :
+    RecyclerView.Adapter<GroupChatAdapter.ViewHolder>() {
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val chat_text: TextView =view.findViewById(R.id.sendmsg)
     }

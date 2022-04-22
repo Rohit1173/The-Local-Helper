@@ -7,14 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
-import android.widget.EdgeEffect
 import android.widget.EditText
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
-class group_chat : Fragment() {
+class GroupChatFragment : Fragment() {
     lateinit var re: RecyclerView
     lateinit var send: FloatingActionButton
     lateinit var msgtext: EditText
@@ -41,7 +39,7 @@ class group_chat : Fragment() {
 
     private fun add_message(message: message) {
         list.add(message)
-        re.adapter = group_chat_adapter(list)
+        re.adapter = GroupChatAdapter(list)
         re.scrollToPosition(list.size - 1)
     }
 
