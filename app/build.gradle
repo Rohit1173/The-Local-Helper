@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
 
 android {
@@ -29,6 +30,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding true
+    }
 
 //    buildFeatures{
 //        dataBinding true;
@@ -36,6 +40,7 @@ android {
 }
 
 dependencies {
+    implementation 'com.google.android.gms:play-services-maps:17.0.1'
     def nav_version = "2.4.2"
     def fragment_version = "1.4.1"
     //val lifecycle_version = "2.5.0-beta01"
