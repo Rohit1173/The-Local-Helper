@@ -2,6 +2,7 @@ package com.example.thelocalhelper
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -45,6 +46,13 @@ class AccountFragment : Fragment() {
         long_lat = v.findViewById(R.id.long_lat)
         getMyLocation(requireContext())
         u_name.text = requireActivity().getIntent().getExtras()!!.getString("username")
+
+        val viewOnMapButton : Button = v.findViewById(R.id.mapactivitybutton)
+        viewOnMapButton.setOnClickListener {
+            val intent = Intent(activity, MapsActivity::class.java)
+            startActivity(intent);
+        }
+
         return v
 
     }
