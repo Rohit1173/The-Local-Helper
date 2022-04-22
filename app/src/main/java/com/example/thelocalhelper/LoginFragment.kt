@@ -56,6 +56,7 @@ class LoginFragment : Fragment() {
                 }
                 Toast.makeText(context, log_msg, Toast.LENGTH_LONG).show()
                 val intent = Intent(activity, ChatActivity::class.java)
+                intent.putExtra("username", log_user.text.toString().trim())
                 startActivity(intent)
             } else {
                 try {

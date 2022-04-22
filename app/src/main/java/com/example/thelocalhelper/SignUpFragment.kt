@@ -60,7 +60,7 @@ class SignUpFragment : Fragment() {
                 }
                 Toast.makeText(context, s_msg, Toast.LENGTH_LONG).show()
                 val intent = Intent(activity, ChatActivity::class.java)
-                intent.putExtra("u_name", set_uname.text.toString().trim())
+                intent.putExtra("username", set_uname.text.toString().trim())
                 startActivity(intent)
             } else {
                 try {
