@@ -32,7 +32,7 @@ class GroupChatFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val v = inflater.inflate(R.layout.fragment_group_chat, container, false)
-        val username = requireActivity().getIntent().getExtras()!!.getString("username").toString()
+        val username = requireActivity().intent.extras!!.getString("username").toString()
         msocket = SocketService().getSingletonConnection()
 //        msocket.connect()
 //        msocket.on(Socket.EVENT_CONNECT){

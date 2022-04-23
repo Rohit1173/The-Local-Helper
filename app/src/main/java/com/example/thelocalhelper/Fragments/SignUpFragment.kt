@@ -1,6 +1,9 @@
 package com.example.thelocalhelper.Fragments
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -16,6 +20,8 @@ import com.example.thelocalhelper.Activities.ChatActivity
 import com.example.thelocalhelper.Data.SignUpData
 import com.example.thelocalhelper.R
 import com.example.thelocalhelper.SignUpViewModel
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.gson.Gson
@@ -34,11 +40,15 @@ class SignUpFragment : Fragment() {
     private lateinit var viewModel: SignUpViewModel
     lateinit var s_msg: String
     lateinit var f_msg: String
+    lateinit var my_latitude:String
+    lateinit var my_longitude:String
+    lateinit var location: FusedLocationProviderClient
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val v = inflater.inflate(R.layout.fragment_signup, container, false)
+        getMyLocation(requireContext())
         signup_btn = v.findViewById(R.id.f_sign_up_btn)
         sigtxt = v.findViewById(R.id.change_to_login)
         set_uname = v.findViewById(R.id.set_uname)
@@ -98,7 +108,9 @@ class SignUpFragment : Fragment() {
                 viewModel.pushSignup(
                     SignUpData(
                         set_uname.text.toString().trim(),
-                        set_password.text.toString().trim()
+                        set_password.text.toString().trim(),
+                        my_latitude,
+                        my_longitude
                     )
                 )
 //                val intent = Intent(activity, ChatActivity::class.java)
@@ -119,5 +131,33 @@ class SignUpFragment : Fragment() {
             return true
         }
         return false
+    }
+    fun getMyLocation(context: Context) {
+        location = LocationServices.getFusedLocationProviderClient(context)
+        val task = location.lastLocation
+        if (ActivityCompat.checkSelfPermission(
+                context,
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                context,
+                android.Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                context as Activity,
+                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                101
+            )
+            return
+        }
+        task.addOnSuccessListener {
+            if (it != null) {
+                //Toast.makeText(context,"${it.latitude},${it.longitude}", Toast.LENGTH_LONG).show()
+                my_latitude = it.latitude.toString()
+                my_longitude = it.longitude.toString()
+
+            }
+
+        }
     }
 }

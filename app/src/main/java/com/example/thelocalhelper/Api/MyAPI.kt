@@ -12,6 +12,8 @@ interface MyAPI {
     fun createuser(
         @Field("userName") userName: String,
         @Field("userPassword") userPassword: String,
+        @Field("userLatitude") userLatitude: String,
+        @Field("userLongitude")  userLongitude:String
     ): Call<DefaultResponse>
 
     @FormUrlEncoded
