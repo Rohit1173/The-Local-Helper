@@ -1,5 +1,7 @@
 package com.example.thelocalhelper.Api
 
+import com.example.thelocalhelper.Api.GeoRetrofitInstance.moshi
+import com.example.thelocalhelper.LocationResponse.GeoLocationResponse
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
@@ -15,7 +17,10 @@ object GeoRetrofitInstance {
         .baseUrl(BASE_URL_STREET)
         .build()
 
-    val api: my_api by lazy {
-        retrofit.create(my_api::class.java)
+
+    private val geoApiService: GeoApiService by lazy {
+        retrofit.create(GeoApiService::class.java)
     }
+
+    val geoApiClient = GeoApiClient(geoApiService)
 }
