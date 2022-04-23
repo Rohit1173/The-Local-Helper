@@ -49,13 +49,8 @@ class GroupChatFragment : Fragment() {
         }
         msocket.on("connection") {
             requireActivity().runOnUiThread {
-                try {
-                    data = it[0].toString()
-                }
-                catch (e:Exception){
-                    Toast.makeText(requireContext(),e.toString(),Toast.LENGTH_LONG).show()
-                }
-                Toast.makeText(requireContext(),"hjdsvjdb",Toast.LENGTH_LONG).show()
+                data = it[0].toString()
+                add_message(message("ME", data, 3))
             }
         }
         msocket.on("chat message") {
