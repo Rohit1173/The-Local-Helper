@@ -71,7 +71,7 @@ class GroupChatFragment : Fragment() {
                 msocket.emit("chat message", jsondata)
                 add_message(message(username, msg,2))
                 msgtext.text.clear()
-                msgtext.hidekeyboard()
+//                msgtext.hidekeyboard()
             }
         }
         return v
@@ -83,11 +83,11 @@ class GroupChatFragment : Fragment() {
         re.scrollToPosition(list.size - 1)
     }
 
-    fun View.hidekeyboard() {
-        val inputManager =
-            context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputManager.hideSoftInputFromWindow(windowToken, 0)
-    }
+//    fun View.hidekeyboard() {
+//        val inputManager =
+//            context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+//        inputManager.hideSoftInputFromWindow(windowToken, 0)
+//    }
 
 
 }
