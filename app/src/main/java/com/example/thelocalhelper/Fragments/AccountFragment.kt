@@ -1,4 +1,4 @@
-package com.example.thelocalhelper
+package com.example.thelocalhelper.Fragments
 
 import android.app.Activity
 import android.content.Context
@@ -12,6 +12,9 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import com.example.thelocalhelper.Activities.MapsActivity
+import com.example.thelocalhelper.NetworkConnection
+import com.example.thelocalhelper.R
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 
@@ -47,7 +50,7 @@ class AccountFragment : Fragment() {
         getMyLocation(requireContext())
         u_name.text = requireActivity().getIntent().getExtras()!!.getString("username")
 
-        val viewOnMapButton : Button = v.findViewById(R.id.mapactivitybutton)
+        val viewOnMapButton: Button = v.findViewById(R.id.mapactivitybutton)
         viewOnMapButton.setOnClickListener {
             val intent = Intent(activity, MapsActivity::class.java)
             startActivity(intent);

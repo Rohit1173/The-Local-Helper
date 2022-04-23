@@ -7,6 +7,7 @@ import java.net.URISyntaxException
 
 class SocketService {
     lateinit var msocket: Socket
+
     init {
         try {
             msocket = IO.socket("http://172.60.104.58:3000")
@@ -15,7 +16,8 @@ class SocketService {
         }
         msocket.connect()
     }
-    fun getSingletonConnection():Socket {
+
+    fun getSingletonConnection(): Socket {
         try {
             if (msocket == null) {
 

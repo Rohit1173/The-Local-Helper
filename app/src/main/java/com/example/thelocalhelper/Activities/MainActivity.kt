@@ -1,9 +1,8 @@
-package com.example.thelocalhelper
+package com.example.thelocalhelper.Activities
 
-import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.example.thelocalhelper.R
 
 
 class MainActivity : AppCompatActivity() {

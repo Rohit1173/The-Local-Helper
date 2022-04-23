@@ -1,7 +1,6 @@
-package com.example.thelocalhelper
+package com.example.thelocalhelper.Fragments
 
 import android.content.Intent
-import android.graphics.Bitmap
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,6 +12,10 @@ import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.thelocalhelper.Activities.ChatActivity
+import com.example.thelocalhelper.Data.SignUpData
+import com.example.thelocalhelper.R
+import com.example.thelocalhelper.SignUpViewModel
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.gson.Gson
@@ -23,30 +26,30 @@ import org.json.JSONObject
 class SignUpFragment : Fragment() {
 
     lateinit var signup_btn: Button
-    lateinit var sigtxt:TextView
-    lateinit var set_uname:TextInputEditText
-    lateinit var set_password:TextInputEditText
-    lateinit var lay_set_uname:TextInputLayout
-    lateinit var lay_set_password:TextInputLayout
-    private lateinit var viewModel: signup_view_model
+    lateinit var sigtxt: TextView
+    lateinit var set_uname: TextInputEditText
+    lateinit var set_password: TextInputEditText
+    lateinit var lay_set_uname: TextInputLayout
+    lateinit var lay_set_password: TextInputLayout
+    private lateinit var viewModel: SignUpViewModel
     lateinit var s_msg: String
     lateinit var f_msg: String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val v= inflater.inflate(R.layout.fragment_signup, container, false)
-         signup_btn = v.findViewById(R.id.f_sign_up_btn)
-         sigtxt=v.findViewById(R.id.change_to_login)
-        set_uname =v.findViewById(R.id.set_uname)
-         set_password=v.findViewById(R.id.set_password)
-         lay_set_uname=v.findViewById(R.id.lay_set_uname)
-         lay_set_password=v.findViewById(R.id.lay_set_password)
+        val v = inflater.inflate(R.layout.fragment_signup, container, false)
+        signup_btn = v.findViewById(R.id.f_sign_up_btn)
+        sigtxt = v.findViewById(R.id.change_to_login)
+        set_uname = v.findViewById(R.id.set_uname)
+        set_password = v.findViewById(R.id.set_password)
+        lay_set_uname = v.findViewById(R.id.lay_set_uname)
+        lay_set_password = v.findViewById(R.id.lay_set_password)
         sigtxt.setOnClickListener {
             findNavController().navigate(R.id.action_fr_signup_to_fr_login)
         }
         viewModel = ViewModelProvider.AndroidViewModelFactory(requireActivity().application)
-            .create(signup_view_model::class.java)
+            .create(SignUpViewModel::class.java)
         viewModel.sign_Response.observe(
             viewLifecycleOwner
         ) {
@@ -86,28 +89,29 @@ class SignUpFragment : Fragment() {
         }
         signup_btn.setOnClickListener {
             if (set_uname.text.toString().trim().isEmpty()) {
-               lay_set_uname.error = "Username cannot be empty"
+                lay_set_uname.error = "Username cannot be empty"
             }
             if (set_password.text.toString().trim().isEmpty()) {
                 lay_set_password.error = "Password cannot be empty"
             }
-            if(checks()) {
+            if (checks()) {
                 viewModel.pushSignup(
-                    signupdata(
-                    set_uname.text.toString().trim(),
-                    set_password.text.toString().trim()
-                )
+                    SignUpData(
+                        set_uname.text.toString().trim(),
+                        set_password.text.toString().trim()
+                    )
                 )
 //                val intent = Intent(activity, ChatActivity::class.java)
 //                intent.putExtra("username", set_uname.text.toString().trim())
 //                startActivity(intent)
-            }
-            else{
-                Toast.makeText(requireContext(),"PLEASE FILL ALL THE DETAILS",Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(requireContext(), "PLEASE FILL ALL THE DETAILS", Toast.LENGTH_LONG)
+                    .show()
             }
         }
         return v
     }
+
     private fun checks(): Boolean {
         if (set_uname.text.toString().trim().isNotEmpty() &&
             set_password.text.toString().trim().isNotEmpty()
@@ -116,6 +120,4 @@ class SignUpFragment : Fragment() {
         }
         return false
     }
-
-
 }

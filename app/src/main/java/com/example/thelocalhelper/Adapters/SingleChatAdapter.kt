@@ -1,10 +1,11 @@
-package com.example.thelocalhelper
+package com.example.thelocalhelper.Adapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.thelocalhelper.R
 
 class SingleChatAdapter(private var list: MutableList<String>) :
     RecyclerView.Adapter<SingleChatAdapter.ViewHolder>() {
