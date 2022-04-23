@@ -37,6 +37,8 @@ class GroupChatFragment : Fragment() {
 //        msocket.on(Socket.EVENT_CONNECT){
 //            Toast.makeText(requireContext(),it[0].toString(),Toast.LENGTH_LONG).show()
 //        }
+
+
         msocket.on(Socket.EVENT_CONNECT) {
             val userdata = userdata(username, "rohit")
             val jsondata2 = gson.toJson(userdata)
