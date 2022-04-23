@@ -1,7 +1,6 @@
 package com.example.thelocalhelper.Fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +13,7 @@ import com.example.thelocalhelper.Data.SendData
 import com.example.thelocalhelper.Data.UserData
 import com.example.thelocalhelper.R
 import com.example.thelocalhelper.SocketService
+import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
 import io.socket.client.Socket
