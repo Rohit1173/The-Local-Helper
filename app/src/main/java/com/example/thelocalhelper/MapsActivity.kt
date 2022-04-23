@@ -44,6 +44,5 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val iiitl = LatLng(26.8008395, 81.0241362)
         mMap.addMarker(MarkerOptions().position(iiitl).title("IIIT Lucknow"))
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(iiitl,10F))
-
     }
 }
