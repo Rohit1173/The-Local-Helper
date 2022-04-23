@@ -12,12 +12,14 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.thelocalhelper.Api.retrofitinstance
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.gson.Gson
 import io.socket.client.IO
 import io.socket.client.Socket
 import java.net.URISyntaxException
 
 
 class GroupChatFragment : Fragment() {
+    val gson: Gson = Gson()
     lateinit var re: RecyclerView
     lateinit var send: FloatingActionButton
     lateinit var msgtext: EditText
@@ -29,13 +31,23 @@ class GroupChatFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val v = inflater.inflate(R.layout.fragment_group_chat, container, false)
+        val username = requireActivity().getIntent().getExtras()!!.getString("username").toString()
         try {
             msocket = IO.socket("http://172.60.104.58:3000")
         } catch (e: URISyntaxException) {
 
         }
         msocket.connect()
-        msocket.on("channel") {
+//        msocket.on(Socket.EVENT_CONNECT){
+//            Toast.makeText(requireContext(),it[0].toString(),Toast.LENGTH_LONG).show()
+//        }
+        msocket.on(Socket.EVENT_CONNECT) {
+            val userdata = userdata(username, "rohit")
+            val jsondata2 = gson.toJson(userdata)
+            msocket.emit("user", jsondata2)
+
+        }
+        msocket.on("connection") {
             requireActivity().runOnUiThread {
                 try {
                     data = it[0].toString()
@@ -46,13 +58,22 @@ class GroupChatFragment : Fragment() {
                 Toast.makeText(requireContext(),"hjdsvjdb",Toast.LENGTH_LONG).show()
             }
         }
+        msocket.on("chat message") {
+            requireActivity().runOnUiThread {
+                val mychat: recieve = gson.fromJson(it[0].toString(), recieve::class.java)
+                add_message(message(mychat.username, mychat.chat, 1))
+            }
+        }
         re = v.findViewById(R.id.grp_chat_recycler)
         send = v.findViewById(R.id.send_btn)
         msgtext = v.findViewById(R.id.msgtext)
-        val username = requireActivity().getIntent().getExtras()!!.getString("username").toString()
+
         send.setOnClickListener {
             val msg: String = msgtext.text.toString().trim()
             if (msg.isNotEmpty()) {
+                val senddata = senddata(msg)
+                val jsondata = gson.toJson(senddata)
+                msocket.emit("chat message", jsondata)
                 add_message(message(username, msg,2))
                 msgtext.text.clear()
                 msgtext.hidekeyboard()
