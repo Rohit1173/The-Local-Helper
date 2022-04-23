@@ -1,4 +1,4 @@
-package com.example.thelocalhelper
+package com.example.thelocalhelper.Fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,9 +10,12 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.thelocalhelper.Activities.ChatActivity
+import com.example.thelocalhelper.Data.LoginData
+import com.example.thelocalhelper.R
+import com.example.thelocalhelper.LoginViewModel
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.gson.Gson
@@ -22,28 +25,28 @@ import org.json.JSONObject
 
 class LoginFragment : Fragment() {
 
-    lateinit var log_btn:Button
-    lateinit var logtxt:TextView
-    lateinit var log_user:TextInputEditText
-    lateinit var log_password:TextInputEditText
-    lateinit var lay_log_user:TextInputLayout
-    lateinit var lay_log_password:TextInputLayout
-    lateinit var vm:login_view_model
+    lateinit var log_btn: Button
+    lateinit var logtxt: TextView
+    lateinit var log_user: TextInputEditText
+    lateinit var log_password: TextInputEditText
+    lateinit var lay_log_user: TextInputLayout
+    lateinit var lay_log_password: TextInputLayout
+    lateinit var vm: LoginViewModel
     lateinit var log_msg: String
     lateinit var log_er_msg: String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val v= inflater.inflate(R.layout.fragment_login, container, false)
-         log_btn=v.findViewById(R.id.log_btn)
-         logtxt=v.findViewById(R.id.change_to_signup)
-         log_user =v.findViewById(R.id.log_user)
-        log_password=v.findViewById(R.id.log_password)
-        lay_log_user=v.findViewById(R.id.lay_log_user)
-        lay_log_password=v.findViewById(R.id.lay_log_password)
+        val v = inflater.inflate(R.layout.fragment_login, container, false)
+        log_btn = v.findViewById(R.id.log_btn)
+        logtxt = v.findViewById(R.id.change_to_signup)
+        log_user = v.findViewById(R.id.log_user)
+        log_password = v.findViewById(R.id.log_password)
+        lay_log_user = v.findViewById(R.id.lay_log_user)
+        lay_log_password = v.findViewById(R.id.lay_log_password)
         vm = ViewModelProvider.AndroidViewModelFactory(requireActivity().application)
-            .create(login_view_model::class.java)
+            .create(LoginViewModel::class.java)
         vm.log_Response.observe(
             viewLifecycleOwner
         ) {
@@ -99,22 +102,19 @@ class LoginFragment : Fragment() {
                     .isNotEmpty() && log_password.text.toString().trim().isNotEmpty()
             ) {
                 vm.checkLogin(
-                    logindata(
-                    log_user.text.toString().trim(),
-                    log_password.text.toString().trim()
-                )
+                    LoginData(
+                        log_user.text.toString().trim(),
+                        log_password.text.toString().trim()
+                    )
                 )
 //                val intent = Intent(activity, ChatActivity::class.java)
 //                intent.putExtra("username", log_user.text.toString().trim())
 //                startActivity(intent)
-            }
-            else{
-                Toast.makeText(requireContext(),"PLEASE FILL ALL THE DETAILS", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(requireContext(), "PLEASE FILL ALL THE DETAILS", Toast.LENGTH_LONG)
+                    .show()
             }
         }
-
         return v
     }
-
-
 }

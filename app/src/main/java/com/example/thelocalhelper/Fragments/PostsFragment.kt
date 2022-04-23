@@ -1,4 +1,4 @@
-package com.example.thelocalhelper
+package com.example.thelocalhelper.Fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.thelocalhelper.Adapters.PostRecyclerViewAdapter
+import com.example.thelocalhelper.R
 
 
 class PostsFragment : Fragment() {
@@ -14,7 +16,7 @@ class PostsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val v= inflater.inflate(R.layout.fragment_posts, container, false)
+        val v = inflater.inflate(R.layout.fragment_posts, container, false)
 
         val arrstr = ArrayList<String>()
         arrstr.add("Need help finding my lost dog")

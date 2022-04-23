@@ -1,7 +1,8 @@
-package com.example.thelocalhelper
+package com.example.thelocalhelper.Activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.thelocalhelper.R
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -42,7 +43,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         // Add a marker in Sydney and move the camera
         val iiitl = LatLng(26.8008395, 81.0241362)
+
+
+
         mMap.addMarker(MarkerOptions().position(iiitl).title("IIIT Lucknow"))
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(iiitl,10F))
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(iiitl, 10F))
     }
 }

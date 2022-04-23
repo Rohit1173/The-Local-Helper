@@ -1,17 +1,20 @@
-package com.example.thelocalhelper
+package com.example.thelocalhelper.Adapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.thelocalhelper.R
 
-class PostRecyclerViewAdapter(val items : ArrayList<String>) : RecyclerView.Adapter<PostRecyclerViewAdapter.ViewHolder>(){
+class PostRecyclerViewAdapter(val items: ArrayList<String>) :
+    RecyclerView.Adapter<PostRecyclerViewAdapter.ViewHolder>() {
     /*
     Reference : https://youtu.be/oDfl-xLXiac
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val viewtemp = LayoutInflater.from(parent.context).inflate(R.layout.post_recycler_view_item,parent,false)
+        val viewtemp = LayoutInflater.from(parent.context)
+            .inflate(R.layout.post_recycler_view_item, parent, false)
         return ViewHolder(viewtemp)
     }
 
@@ -24,7 +27,7 @@ class PostRecyclerViewAdapter(val items : ArrayList<String>) : RecyclerView.Adap
         return items.size
     }
 
-    class ViewHolder(view : View): RecyclerView.ViewHolder(view){
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val item_text = view.findViewById<TextView>(R.id.post_title)
     }
 }

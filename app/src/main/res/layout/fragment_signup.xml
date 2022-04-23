@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/wave_bg"
-    tools:context=".SignUpFragment">
+    tools:context=".Fragments.SignUpFragment">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/sel_profile_img"
