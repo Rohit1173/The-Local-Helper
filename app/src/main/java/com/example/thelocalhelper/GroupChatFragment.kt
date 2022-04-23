@@ -32,12 +32,8 @@ class GroupChatFragment : Fragment() {
     ): View? {
         val v = inflater.inflate(R.layout.fragment_group_chat, container, false)
         val username = requireActivity().getIntent().getExtras()!!.getString("username").toString()
-        try {
-            msocket = IO.socket("http://172.60.104.58:3000")
-        } catch (e: URISyntaxException) {
-
-        }
-        msocket.connect()
+        msocket= SocketService().getSingletonConnection()
+//        msocket.connect()
 //        msocket.on(Socket.EVENT_CONNECT){
 //            Toast.makeText(requireContext(),it[0].toString(),Toast.LENGTH_LONG).show()
 //        }
