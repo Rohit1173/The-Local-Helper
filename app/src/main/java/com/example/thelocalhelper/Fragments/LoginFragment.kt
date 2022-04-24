@@ -117,9 +117,9 @@ class LoginFragment : Fragment() {
                         log_password.text.toString().trim()
                     )
                 )
-                val intent = Intent(activity, ChatActivity::class.java)
-                intent.putExtra("username", log_user.text.toString().trim())
-                startActivity(intent)
+//                val intent = Intent(activity, ChatActivity::class.java)
+//                intent.putExtra("username", log_user.text.toString().trim())
+//                startActivity(intent)
             } else {
                 Toast.makeText(requireContext(), "PLEASE FILL ALL THE DETAILS", Toast.LENGTH_LONG)
                     .show()
