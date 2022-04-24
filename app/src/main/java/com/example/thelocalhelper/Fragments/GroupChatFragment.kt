@@ -1,18 +1,31 @@
 package com.example.thelocalhelper.Fragments
 
+import android.app.Activity
+import android.app.Application
+import android.content.Context
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.thelocalhelper.Adapters.GroupChatAdapter
+import com.example.thelocalhelper.Api.GeoRetrofitInstance
 import com.example.thelocalhelper.Data.Message
 import com.example.thelocalhelper.Data.Recieve
 import com.example.thelocalhelper.Data.SendData
 import com.example.thelocalhelper.Data.UserData
+import com.example.thelocalhelper.GroupChatViewModel
 import com.example.thelocalhelper.R
 import com.example.thelocalhelper.SocketService
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
@@ -20,13 +33,21 @@ import io.socket.client.Socket
 
 
 class GroupChatFragment : Fragment() {
+
+    val groupChatViewModel:GroupChatViewModel by lazy {
+        ViewModelProvider(this).get(GroupChatViewModel::class.java)
+    }
     val gson: Gson = Gson()
+    lateinit var GEO_LOC:String
     lateinit var re: RecyclerView
     lateinit var send: FloatingActionButton
     lateinit var msgtext: EditText
     lateinit var msocket: Socket
     lateinit var data: String
     var list = mutableListOf<Message>()
+    var lat : String ="lat"
+    var lon : String ="lon"
+    lateinit var location: FusedLocationProviderClient
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,12 +55,28 @@ class GroupChatFragment : Fragment() {
         val v = inflater.inflate(R.layout.fragment_group_chat, container, false)
         val username = requireActivity().intent.extras!!.getString("username").toString()
         msocket = SocketService().getSingletonConnection()
-//        msocket.connect()
-//        msocket.on(Socket.EVENT_CONNECT){
-//            Toast.makeText(requireContext(),it[0].toString(),Toast.LENGTH_LONG).show()
+        msocket.connect()
+        msocket.on(Socket.EVENT_CONNECT){
+            Toast.makeText(requireContext(),it[0].toString(),Toast.LENGTH_LONG).show()
+        }
+
+        ///////////////////////////////////////
+
+//        suspend fun getLocationDetails(format:String,lat:String,lon:String,zoom:String){
+//            getMyLocation(context)
+//            val request = GeoRetrofitInstance.geoApiClient.getChatRoom("json",lat,lon,20.toString())
 //        }
+
+        groupChatViewModel.locationLiveData.observe(viewLifecycleOwner){response->
+            if(response==null){
+                Toast.makeText(requireContext(),"Error in connection cannot get location",Toast.LENGTH_LONG).show()
+                return@observe
+            }
+            GEO_LOC = response.place_id.toString()
+        }
+        ///////////////////////////////////////////
         msocket.on(Socket.EVENT_CONNECT) {
-            val userdata = UserData(username, "rohit")
+            val userdata = UserData(username, GEO_LOC)
             val jsondata2 = gson.toJson(userdata)
             msocket.emit("user", jsondata2)
 
