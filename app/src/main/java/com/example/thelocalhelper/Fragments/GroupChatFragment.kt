@@ -66,6 +66,7 @@ class GroupChatFragment : Fragment() {
 //            val request = GeoRetrofitInstance.geoApiClient.getChatRoom("json",lat,lon,20.toString())
 //        }
 
+        groupChatViewModel.getLocatin()
         groupChatViewModel.locationLiveData.observe(viewLifecycleOwner){response->
             if(response==null){
                 Toast.makeText(requireContext(),"Error in connection cannot get location",Toast.LENGTH_LONG).show()

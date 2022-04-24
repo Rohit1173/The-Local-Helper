@@ -9,8 +9,7 @@ import retrofit2.http.Query
 
 interface GeoApiService {
 
-    @FormUrlEncoded
-    @GET("/reverse")
+    @GET("/reverse?")
     fun getChatRoom(
         @Query("format") format: String,
         @Query("lat") lat: String,

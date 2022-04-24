@@ -26,9 +26,10 @@ class GroupChatViewModel(application: Application): AndroidViewModel(application
 //    var geoLocationLiveData: MutableLiveData<GeoLocationResponse?> = locationLiveData
     private suspend fun getLocationDetails(): GeoLocationResponse? {
         getMyLocation(context)
-        val request = GeoRetrofitInstance.geoApiClient.getChatRoom("json",lat,lon,20.toString())
+        val request = GeoRetrofitInstance.geoApi.getChatRoom("json",lat,lon,20.toString())
         if(request.isSuccessful) {
             var data = request.body()!!
+            return data
         }
         return null
     }
