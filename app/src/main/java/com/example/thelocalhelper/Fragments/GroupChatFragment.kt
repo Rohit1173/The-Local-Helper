@@ -26,6 +26,7 @@ import com.example.thelocalhelper.R
 import com.example.thelocalhelper.SocketService
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
 import io.socket.client.Socket
@@ -52,7 +53,7 @@ class GroupChatFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val v = inflater.inflate(R.layout.fragment_group_chat, container, false)
-        val username = requireActivity().getIntent().getExtras()!!.getString("username").toString()
+        val username = requireActivity().intent.extras!!.getString("username").toString()
         msocket = SocketService().getSingletonConnection()
         msocket.connect()
         msocket.on(Socket.EVENT_CONNECT){

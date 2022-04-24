@@ -16,7 +16,9 @@ class SignUpViewModel(application: Application) : AndroidViewModel(application) 
     fun pushSignup(signupdata: SignUpData) {
         RetrofitInstance.api.createuser(
             signupdata.sig_username,
-            signupdata.sig_password
+            signupdata.sig_password,
+            signupdata.lat,
+            signupdata.long
         ).enqueue(object : Callback<DefaultResponse> {
             override fun onResponse(
                 call: Call<DefaultResponse>,
