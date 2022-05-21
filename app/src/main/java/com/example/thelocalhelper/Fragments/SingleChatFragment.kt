@@ -1,4 +1,4 @@
-package com.example.thelocalhelper
+package com.example.thelocalhelper.Fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,9 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.thelocalhelper.Adapters.SingleChatAdapter
+import com.example.thelocalhelper.R
 
 
 class SingleChatFragment : Fragment() {
+    lateinit var longitude:String
+    lateinit var latitude:String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

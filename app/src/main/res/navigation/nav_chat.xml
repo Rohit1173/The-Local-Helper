@@ -17,7 +17,7 @@
         tools:layout="@layout/fragment_group_chat" />
     <fragment
         android:id="@+id/single_chat"
-        android:name="com.example.thelocalhelper.SingleChatFragment"
+        android:name="com.example.thelocalhelper.Fragments.SingleChatFragment"
         android:label="fragment_single_chat"
         tools:layout="@layout/fragment_single_chat" />
     <fragment

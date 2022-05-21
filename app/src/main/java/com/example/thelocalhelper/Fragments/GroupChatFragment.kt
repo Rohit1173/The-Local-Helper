@@ -26,6 +26,9 @@ class GroupChatFragment : Fragment() {
     lateinit var msgtext: EditText
     lateinit var msocket: Socket
     lateinit var data: String
+    lateinit var longitude:String
+    lateinit var latitude:String
+    lateinit var post:String
     var list = mutableListOf<Message>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,13 +36,12 @@ class GroupChatFragment : Fragment() {
     ): View? {
         val v = inflater.inflate(R.layout.fragment_group_chat, container, false)
         val username = requireActivity().intent.extras!!.getString("username").toString()
+        longitude =requireActivity().intent.extras!!.getString("longitude").toString()
+        latitude=requireActivity().intent.extras!!.getString("latitude").toString()
+        post=requireActivity().intent.extras!!.getString("post").toString()
         msocket = SocketService().getSingletonConnection()
-//        msocket.connect()
-//        msocket.on(Socket.EVENT_CONNECT){
-//            Toast.makeText(requireContext(),it[0].toString(),Toast.LENGTH_LONG).show()
-//        }
         msocket.on(Socket.EVENT_CONNECT) {
-            val userdata = UserData(username, "rohit")
+            val userdata = UserData(username, post)
             val jsondata2 = gson.toJson(userdata)
             msocket.emit("user", jsondata2)
 

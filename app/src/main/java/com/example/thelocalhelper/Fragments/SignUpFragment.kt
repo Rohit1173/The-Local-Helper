@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,12 +13,14 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.thelocalhelper.Activities.ChatActivity
 import com.example.thelocalhelper.Data.SignUpData
 import com.example.thelocalhelper.R
 import com.example.thelocalhelper.SignUpViewModel
+import com.example.thelocalhelper.postcodeviewmodel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.textfield.TextInputEditText
@@ -40,15 +41,23 @@ class SignUpFragment : Fragment() {
     private lateinit var viewModel: SignUpViewModel
     lateinit var s_msg: String
     lateinit var f_msg: String
-    lateinit var my_latitude:String
-    lateinit var my_longitude:String
+     lateinit var my_latitude:String
+     lateinit var my_longitude:String
+    lateinit var post:String
     lateinit var location: FusedLocationProviderClient
+    lateinit var vm:postcodeviewmodel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         val v = inflater.inflate(R.layout.fragment_signup, container, false)
         getMyLocation(requireContext())
+        vm = ViewModelProvider.AndroidViewModelFactory(requireActivity().application).create(postcodeviewmodel::class.java)
+        vm.myname.observe(viewLifecycleOwner){
+            post= it.address.postcode
+        }
+
         signup_btn = v.findViewById(R.id.f_sign_up_btn)
         sigtxt = v.findViewById(R.id.change_to_login)
         set_uname = v.findViewById(R.id.set_uname)
@@ -74,6 +83,9 @@ class SignUpFragment : Fragment() {
                 Toast.makeText(context, s_msg, Toast.LENGTH_LONG).show()
                 val intent = Intent(activity, ChatActivity::class.java)
                 intent.putExtra("username", set_uname.text.toString().trim())
+                intent.putExtra("longitude",my_longitude)
+                intent.putExtra("latitude",my_latitude)
+                intent.putExtra("post",post)
                 startActivity(intent)
             } else {
                 try {
@@ -113,9 +125,6 @@ class SignUpFragment : Fragment() {
                         my_longitude
                     )
                 )
-//                val intent = Intent(activity, ChatActivity::class.java)
-//                intent.putExtra("username", set_uname.text.toString().trim())
-//                startActivity(intent)
             } else {
                 Toast.makeText(requireContext(), "PLEASE FILL ALL THE DETAILS", Toast.LENGTH_LONG)
                     .show()

@@ -10,7 +10,7 @@ class SocketService {
 
     init {
         try {
-            msocket = IO.socket("http://172.60.104.58:3000")
+            msocket = IO.socket("http://192.168.31.238:3000")
         } catch (e: URISyntaxException) {
             e.printStackTrace()
         }
@@ -21,7 +21,7 @@ class SocketService {
         try {
             if (msocket == null) {
 
-                msocket = IO.socket("http://172.60.104.58:3000")
+                msocket = IO.socket("http://192.168.31.238:3000")
                 msocket.connect()
                 return msocket
             } else

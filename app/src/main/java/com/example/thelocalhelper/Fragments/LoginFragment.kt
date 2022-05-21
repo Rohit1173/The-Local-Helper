@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,12 +13,14 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.thelocalhelper.Activities.ChatActivity
 import com.example.thelocalhelper.Data.LoginData
-import com.example.thelocalhelper.R
 import com.example.thelocalhelper.LoginViewModel
+import com.example.thelocalhelper.R
+import com.example.thelocalhelper.postcodeviewmodel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.textfield.TextInputEditText
@@ -42,6 +43,8 @@ class LoginFragment : Fragment() {
     lateinit var log_er_msg: String
     lateinit var my_latitude:String
     lateinit var my_longitude:String
+    lateinit var post:String
+    lateinit var post_vm:postcodeviewmodel
     lateinit var location:FusedLocationProviderClient
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,6 +52,10 @@ class LoginFragment : Fragment() {
     ): View? {
         val v = inflater.inflate(R.layout.fragment_login, container, false)
         getMyLocation(requireContext())
+        post_vm = ViewModelProvider.AndroidViewModelFactory(requireActivity().application).create(postcodeviewmodel::class.java)
+        post_vm.myname.observe(viewLifecycleOwner){
+            post= it.address.postcode
+        }
         log_btn = v.findViewById(R.id.log_btn)
         logtxt = v.findViewById(R.id.change_to_signup)
         log_user = v.findViewById(R.id.log_user)
@@ -70,6 +77,9 @@ class LoginFragment : Fragment() {
                 Toast.makeText(context, log_msg, Toast.LENGTH_LONG).show()
                 val intent = Intent(activity, ChatActivity::class.java)
                 intent.putExtra("username", log_user.text.toString().trim())
+                intent.putExtra("longitude",my_longitude)
+                intent.putExtra("latitude",my_latitude)
+                intent.putExtra("post",post)
                 startActivity(intent)
             } else {
                 try {
@@ -117,9 +127,6 @@ class LoginFragment : Fragment() {
                         log_password.text.toString().trim()
                     )
                 )
-//                val intent = Intent(activity, ChatActivity::class.java)
-//                intent.putExtra("username", log_user.text.toString().trim())
-//                startActivity(intent)
             } else {
                 Toast.makeText(requireContext(), "PLEASE FILL ALL THE DETAILS", Toast.LENGTH_LONG)
                     .show()
